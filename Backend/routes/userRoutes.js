@@ -1,16 +1,12 @@
 import express from 'express';
+import { authMiddleware } from "../middleware/authMiddleware.js";
+import { getUser, changepassword, updateUser } from "../controllers/userController.js";
 
 const router = express.Router();
 
-// User routes will be implemented here
-// GET /users
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Get users endpoint' });
-});
+router.get("/",authMiddleware, getUser);
+router.put("/changepassword", authMiddleware, changepassword);
+router.put("/updateUser", authMiddleware, updateUser);
 
-// GET /users/:id
-router.get('/:id', (req, res) => {
-  res.status(200).json({ message: 'Get user by ID endpoint' });
-});
 
 export default router;
