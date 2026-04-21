@@ -13,6 +13,10 @@ const PORT = process.env.PORT || 8800;
 
 // Middleware
 app.use(cors());//acess from any origin
+//if we want from particular origin then we can do like this
+// app.use(cors({
+//   origin: 'http://example.com' // Replace with your frontend URL
+// }));
 app.use(express.json({limit: '10mb'}));
 app.use(express.urlencoded({ extended: true }));
 
