@@ -1,16 +1,17 @@
 import express from 'express';
-
 const router = express.Router();
-
+import { addMoneyToAccount, createAccount,getAccounts ,deleteAccount} from '../controllers/accountController.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
 // Account routes will be implemented here
 // GET /accounts
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Get accounts endpoint' });
-});
+// router.get('/',authMiddleware,getAccount);
+router.get('/:id',authMiddleware,getAccounts);
 
 // POST /accounts
-router.post('/', (req, res) => {
-  res.status(200).json({ message: 'Create account endpoint' });
-});
+router.post('/create',authMiddleware, createAccount);
+
+router.put("/add-money/:id",authMiddleware, addMoneyToAccount);
+
+router.delete('/:id', authMiddleware, deleteAccount);
 
 export default router;

@@ -1,16 +1,13 @@
 import express from 'express';
-
 const router = express.Router();
+import { addTransaction, getDashboardInformation, getTransactions, transferMoneyToAccount } from '../controllers/transactionController.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
 
-// Transaction routes will be implemented here
-// GET /transactions
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Get transactions endpoint' });
-});
+router.get('/', authMiddleware, getTransactions);
+router.get('/dashboard', authMiddleware, getDashboardInformation);
 
-// POST /transactions
-router.post('/', (req, res) => {
-  res.status(200).json({ message: 'Create transaction endpoint' });
-});
+router.post("/add-transaction/:account_id", authMiddleware, addTransaction);
+
+router.put('/transfer-money', authMiddleware, transferMoneyToAccount);
 
 export default router;
